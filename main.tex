@@ -74,7 +74,7 @@
 }
 \author{
 		\normalfont 								\normalsize
-        Robert deCarvalho and Scott Nguyen\\[-3pt]		\normalsize
+        Braket Technologies\\[-3pt]		\normalsize
         \today
 }
 \date{}
@@ -86,8 +86,11 @@
 \section{Introduction}
 Scott.  Maybe you can write something in here that sets the context for this work.  The type of instrument used, the circumstances that triggered this work, etc.
 
-\section{Mathematical Description}
-The xxx instrument produces timeseries measurements consisting of a time-stamp, a bearing angle and a signal strength.  \ref{fig:sample_time_trace} shows one such measurement run.  The instrument is placed at a particular location within the pipe being measured.  While remaining at a fixed location in the pipe, the instrument rotates to capture measure signal the signal strength as a function of bearing.  After that location has been measured, the instrument stops rotating and is moved to a different location within the pipe where the process is repeated.
+\section{Illustrative Measurements}
+The xxx instrument produces timeseries measurements consisting of a time-stamp, a bearing angle and a signal strength.  Fig. \ref{fig:sample_time_trace} shows one such measurement run.  The instrument is placed at a particular location within the pipe being measured.  While remaining at a fixed location in the pipe, the instrument rotates to capture measure signal the signal strength as a function of bearing.  After that location has been measured, the instrument stops rotating and is moved to a different location within the pipe where the process is repeated.
+
+\par Although the time-series plots are useful for visualizing entire measurement runs, the signal dependence on bearing at a particular location is most useful and is shown in Fig. \ref{fig:sample_bearing_trace}
+
 
 \begin{figure}[h]
   \caption{A time-series from the XXX instrument taken during a calibration run. The interval between 0 and 120 seconds is taken at a fixed location in the pipe while rotating through different bearing angles.  Rotation is then stopped for the period between 120 and 220 seconds as the instrument is moved to a different pipe location.  This second location is then measured in the interval between 220 and 360 seconds.}
@@ -95,6 +98,27 @@ The xxx instrument produces timeseries measurements consisting of a time-stamp, 
   \centering
   \includegraphics[width=1.0\textwidth]{figures/sample_time_trace.pdf}
 \end{figure}
+
+\begin{figure}[h]
+  \caption{These traces show how the presence of the cable alters the angular dependence of the signal strength.  The relative signal strengths, amplitude variations and phase of the resulting traces will depend on the details of the background and cable signals.}
+  \label{fig:sample_bearing_trace}
+  \centering
+  \includegraphics[width=1.0\textwidth]{figures/sample_bearing_trace.pdf}
+\end{figure}
+
+\section{Mathematical Model}
+We model the bearing dependence of signal strength as simple sinusoidal functions of unknown amplitude and phase.  Although the curve shapes in Fig. \ref{fig:sample_bearing_trace} are not perfect fits, we find that the sinusoidal model captures the important relevant features.
+\par In the absence of the cable, background signals are measured by the instrument.  These are thought to be dominated by imperfect centering within the pipe bore, but other effects include angular variations of the tube-wall properties.  When the cable is present, the angular asymmetry it introduces also creates a angular variation of the signal strength, which we again model with a sinusoidal function.  The total signal measured will be the sum of background and cable variations and are modeled by the equation
+\begin{equation} \label{eq:trig_sig}
+    s = C sin\left(\theta + \phi_1\right) + B sin\left(\theta + \phi_2\right),
+\end{equation}
+where
+\begin{align}
+        S &= \text{total signal amplitude} \\
+        C &= \text{cable signal amplitude} \\
+        B &= \text{background signal amplitude.}
+\end{align}
+This means that, for any measurement set our model requires us to specify four parameters: two amplitudes and two phases.  This problem becomes more intuitive if we use phasors to represent the two signals being added.
 
 
 \section{Begin Examples}
