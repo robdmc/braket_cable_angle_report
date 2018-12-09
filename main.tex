@@ -181,8 +181,64 @@ See if this is a new paragraph.
 
 \begin{appendices}
 \section{Angle Relationships}
-\subsection{This is firs sub}
-hello
+\subsection{Formulating the Problem}
+The signal measured within the pipe will vary as a function of angle.  We can break down the source of this signal into two components.  The first component we will call the ``cable signal.''  This is the signal variation caused by the presence of the cable attached to the outside of the pipe.  The second component we will call the ``background signal,'' which arises from all other sources of angular asymmetry in the system.  This is thought to be dominated by imperfect centering of the instrument within the pipe.
+
+\par We model both the background and cable signals as if they were sinusoidal function.  Figure \ref{fig:sigs_vs_bearing} shows a model we will use as an example for describing our analysis.  In this model, the background signal is one quarter the amplitude of the cable signal and it is offset in angle by 135 degrees.  The instrument will measure the sum of these two signals, which, of course, will have a different amplitude and phase than either of is constituent signals.
+
+\begin{figure}[h!]
+  \caption{An Example Model.  The background signal is one quarter the amplitude of the cable signal, and has a 135 degree offset in bearing.}
+  \label{fig:sigs_vs_bearing}
+  \centering
+  \includegraphics[width=1.0\textwidth]{figures/sigs_vs_bearing.pdf}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{
+  The phasor representation of the example model from Figure \ref{fig:sigs_vs_bearing}. $s$ is the measured cable signal, $b$ the background phasor and $m$ the measured phasor.  The value we really care about is $\theta$, the angle between the measured and cable signals.  Note that we can only determine the magnitude of the angle, but not the sign.  The phasor relationships shown in solids lines are indistinguishable from those shown by the dashed lines.  This model provides no information for distinguishing between the $\pm\theta$ solutions}
+  \label{fig:phasor_base}
+  \centering
+  \includegraphics[width=1.0\textwidth]{figures/phasor_base.pdf}
+\end{figure}
+
+\par Our objective is to find the bearing correction that must be applied to the measured signal in order to arrive at the true cable signal.  This problem is most easily solved by considering the phasor representation.  Figure \ref{fig:phasor_base} shows the phasor representation for the same example model shown in Figure \ref{fig:phasor_base}.  In this representation, the correction angle, $\theta$ is readily obtained from the law of cosines.
+
+\begin{equation} \label{eq:law_of_cos}
+cos\left(\theta\right) = \frac{m^2 + s^2 - b^2}{2ms}
+\end{equation}
+But since $cos$ is an even function of its argument, we are unable to distinguish between solutions having postive and negative $\theta$.  So our solution becomes
+
+\begin{equation} \label{eq:theta_solution}
+\theta = \pm cos^{-1}\left(\frac{m^2 + s^2 - b^2}{2ms}\right)
+\end{equation}
+where
+\begin{align*}
+        \theta &= \text{The angle between the measured and cable signals}\\
+        s &= \text{cable signal amplitude.}\\
+        b &= \text{background signal amplitude} \\
+        m &= \text{measured signal amplitude} \\
+\end{align*}
+
+
+
+\section{Bogus}
+
+We model the bearing dependence of signal strength as simple sinusoidal functions of unknown amplitude and phase.  Although the curve shapes in Fig. \ref{fig:sample_bearing_trace} are not perfect fits, we find that the sinusoidal model captures the important relevant features.
+\par In the absence of the cable, background signals are measured by the instrument.  These are thought to be dominated by imperfect centering within the pipe bore, but other effects include angular variations of the tube-wall properties.  When the cable is present, the angular asymmetry it introduces also creates a angular variation of the signal strength, which we again model with a sinusoidal function.  The total signal measured will be the sum of background and cable variations and are modeled by the equation
+\begin{equation} \label{eq:trig_sig}
+    s = C sin\left(\theta + \phi_1\right) + B sin\left(\theta + \phi_2\right),
+\end{equation}
+where
+\begin{align}
+        S &= \text{total signal amplitude} \\
+        C &= \text{cable signal amplitude} \\
+        B &= \text{background signal amplitude.}
+\end{align}
+This means that, for any measurement set our model requires us to specify four parameters: two amplitudes and two phases.  \par This problem becomes more intuitive if we use phasors to represent the two signals being added.
+
+
+
+
 
 \subsection{This is second sub}
 hello
