@@ -37,8 +37,9 @@
 \usepackage[pdftex]{graphicx}	
 \usepackage{url}
 \usepackage[titletoc,title]{appendix}
-\usepackage[options ]{algorithm2e}
+\usepackage[boxruled ]{algorithm2e}
 \usepackage{listings}
+\usepackage{bm}
 
 
 %%% Custom sectioning
@@ -89,96 +90,18 @@
 \section{Introduction}
 Scott.  Maybe you can write something in here that sets the context for this work.  The type of instrument used, the circumstances that triggered this work, etc.
 
-\section{Illustrative Measurements}
-The xxx instrument produces timeseries measurements consisting of a time-stamp, a bearing angle and a signal strength.  Fig. \ref{fig:sample_time_trace} shows one such measurement run.  The instrument is placed at a particular location within the pipe being measured.  While remaining at a fixed location in the pipe, the instrument rotates to capture measure signal the signal strength as a function of bearing.  After that location has been measured, the instrument stops rotating and is moved to a different location within the pipe where the process is repeated.
+\section{The Rest of the Paper}
+Scott write this.
 
-\par Although the time-series plots are useful for visualizing entire measurement runs, the signal dependence on bearing at a particular location is most useful and is shown in Fig. \ref{fig:sample_bearing_trace}
-
-
-\begin{figure}[h!]
-  \caption{A time-series from the XXX instrument taken during a calibration run. The interval between 0 and 120 seconds is taken at a fixed location in the pipe while rotating through different bearing angles.  Rotation is then stopped for the period between 120 and 220 seconds as the instrument is moved to a different pipe location.  This second location is then measured in the interval between 220 and 360 seconds.}
-  \label{fig:sample_time_trace}
-  \centering
-  \includegraphics[width=1.0\textwidth]{figures/sample_time_trace.pdf}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{These traces show how the presence of the cable alters the angular dependence of the signal strength.  The relative signal strengths, amplitude variations and phase of the resulting traces will depend on the details of the background and cable signals.}
-  \label{fig:sample_bearing_trace}
-  \centering
-  \includegraphics[width=1.0\textwidth]{figures/sample_bearing_trace.pdf}
-\end{figure}
-
-\section{Mathematical Model}
-We model the bearing dependence of signal strength as simple sinusoidal functions of unknown amplitude and phase.  Although the curve shapes in Fig. \ref{fig:sample_bearing_trace} are not perfect fits, we find that the sinusoidal model captures the important relevant features.
-\par In the absence of the cable, background signals are measured by the instrument.  These are thought to be dominated by imperfect centering within the pipe bore, but other effects include angular variations of the tube-wall properties.  When the cable is present, the angular asymmetry it introduces also creates a angular variation of the signal strength, which we again model with a sinusoidal function.  The total signal measured will be the sum of background and cable variations and are modeled by the equation
-\begin{equation} \label{eq:trig_sig}
-    s = C sin\left(\theta + \phi_1\right) + B sin\left(\theta + \phi_2\right),
-\end{equation}
-where
-\begin{align}
-        S &= \text{total signal amplitude} \\
-        C &= \text{cable signal amplitude} \\
-        B &= \text{background signal amplitude.}
-\end{align}
-This means that, for any measurement set our model requires us to specify four parameters: two amplitudes and two phases.  \par This problem becomes more intuitive if we use phasors to represent the two signals being added.
+Here is sin phi model.
+measurement is the sum of the two
+drop into phasor
+define max error
+compute bearing correction for exactly knows sig/back
+talk stats
 
 
-\section{Begin Examples}
-And of course, this is just an example of how to do equations.  I'll keep it here as a template for working with equations below.
-\begin{align} 
-	\begin{split}
-	(x+y)^3 	&= (x+y)^2(x+y)\\
-					&=(x^2+2xy+y^2)(x+y)\\
-					&=(x^3+2x^2y+xy^2) + (x^2y+2xy^2+y^3)\\
-					&=x^3+3x^2y+3xy^2+y^3
-	\end{split}					
-\end{align}
 
-\subsection{Example of a susection}
-Subsection text with another equation.  And here is a figure.
-
-\begin{align}
-	A = 
-	\begin{bmatrix}
-	A_{11} & A_{21} \\
-  	A_{21} & A_{22}
-	\end{bmatrix}
-\end{align}
-And some more text. And maybe another figure.
-
-\subsubsection{SubSub section}
-More text here
-
-\paragraph{Paragraph Header if you want it}
-Some stuff in a paragragh.
-
-\paragraph{}
-See if this is a new paragraph.
-
-
-\section{Lists}
-
-\subsection{Example for list (3*itemize)}
-\begin{itemize}
-	\item First item in a list 
-		\begin{itemize}
-		\item First item in a list 
-			\begin{itemize}
-			\item First item in a list 
-			\item Second item in a list 
-			\end{itemize}
-		\item Second item in a list 
-		\end{itemize}
-	\item Second item in a list 
-\end{itemize}
-
-\subsection{Example for list (enumerate)}
-\begin{enumerate}
-	\item First item in a list 
-	\item Second item in a list 
-	\item Third item in a list
-\end{enumerate}
 
 
 \begin{appendices}
@@ -203,12 +126,12 @@ The signal measured within the pipe will vary as a function of angle.  We can br
   \includegraphics[width=1.0\textwidth]{figures/phasor_base.pdf}
 \end{figure}
 
-\par Our objective is to find the bearing correction that must be applied to the measured signal in order to arrive at the true cable signal.  This problem is most easily solved by considering the phasor representation.  Figure \ref{fig:phasor_base} shows the phasor representation for the same example model shown in Figure \ref{fig:phasor_base}.  In this representation, the correction angle, $\theta$ is readily obtained from the law of cosines.
+\par Our objective is to find the bearing correction that must be applied to the measured signal in order to arrive at the true cable signal.  This problem is most easily solved by considering the phasor representation.  Figure \ref{fig:phasor_base} shows the phasor representation for the same example model shown in Figure \ref{fig:sigs_vs_bearing}.  In this representation, the correction angle, $\theta$ is readily obtained from the law of cosines.
 
 \begin{equation} \label{eq:law_of_cos}
     \cos\left(\theta\right) = \frac{m^2 + s^2 - b^2}{2ms}
 \end{equation}
-But since $cos$ is an even function of its argument, we are unable to distinguish between solutions having postive and negative $\theta$.  So our solution becomes
+But since $\cos\left(\cdot\right)$ is an even function of its argument, we are unable to distinguish between solutions having positive and negative $\theta$.  So our solution becomes
 
 \begin{equation} \label{eq:theta_solution}
 \theta = \pm \cos^{-1}\left(\frac{m^2 + s^2 - b^2}{2ms}\right)
@@ -224,11 +147,11 @@ where
 
 
 \subsection{Valid Solutions} \label{section:validity}
-If the only information available from the system is the measured signal, there is no way to uniquely identify what the correction angle could be.  This is because there are infinitely many combinations of $s$, $b$, and $\theta$ that all generate exactly the same measured signal. We are not, however, free to pick any combination of $s$, $b$, and $\theta$.  The values we pick must be able to form a triangle in phasor space.  To get a feel for these constraints, we can rearrange eq. \ref{eq:law_of_cos} to the form
+If the only information available from the system were the measured signal, there would be no way to uniquely identify what the correction angle.  This is because (referring to Figure \ref{fig:phasor_base}) there are infinitely many combinations of $s$, $b$, and $\theta$ that all generate exactly the same measured signal. We are not, however, free to pick any combination of $s$, $b$, and $\theta$.  The values we pick must be able to form a triangle in phasor space.  To get a feel for these constraints, we can rearrange equation \ref{eq:law_of_cos} to the form
 \begin{equation}
     b^2 = m^2 + s^2 - 2 m s \cos\left(\theta\right).
 \end{equation}
-In this form it is easy to see that, for fixes $m$ and $s$, the value of $b$ must be in the range
+In this form it is easy to see that, for fixed $m$ and $s$, the value of $b$ must be in the range
 
 \begin{equation*}
       m^2 + s^2 - 2 m s \leq b ^ 2 \leq  m^2 + s^2 + 2 m s
@@ -237,62 +160,67 @@ or
 \begin{equation} \label{eq:bounds}
       \left(m-s\right)^2 \leq b ^ 2 \leq \left(m + s\right)^2.  
 \end{equation}
-Any combination of $m$, $s$ and $b$ that satisfy equation \ref{eq:bounds} is a valid solution to the phasor triangle with a unique value for $\cos\left(\theta\right)$.  But again, since $\cos$ is an even function, we are only able to determine $\theta$ up to a sign.
+Any combination of $m$, $s$ and $b$ that satisfy equation \ref{eq:bounds} is a valid solution to the phasor triangle and will have a unique value for $\cos\left(\theta\right)$.  But again, since $\cos\left(\cdot\right)$ is an even function, we are only able to determine $\theta$ up to a sign.
     
 \section{Statistical Treatment}
 The last two sections have shown that if we only know the measured signal, there are infinitely many combinations of background and cable signal strengths that could have resulted in that measurement.  This, of course, assumed we had absolutely no knowledge of how big we expected the background and cable signals to be.  We now allow ourselves to apply additional constraints to our problem by specifying a range of plausible values for the background and cable signals.  In practice, these plausibility ranges are determined by conducting calibration runs of the pipe and cable we are working with.  In the calibration runs, we can take many measurements of the pipe with no cable attached.  These measurements will give us a sense of the range we can expect for the background signal.  Similarly, we can carefully set up a calibration run where we deliberately configure the system to have negligible background.  In this configuration, we can measure different cable attachments to get a sense of the range we can expect for the cable signal.  We can characterize these ranges as being statistical distributions with a given mean, $\mu$, and standard deviation, $\sigma$. There are any number of statistical distributions we could use, but here we select the gamma distribution.  Our primary motivation for selecting the Gamma distribution is that, like the amplitudes we are modeling, it is only defined for positive values.  We could have chosen any other distribution with this property, but the Gamma distribution is well understood and widely used. 
 
-\par Based onWe use a monte-carlo simulation algorithm to estimate the distribution of the bearingOur procedure will then be as follows:
+\par Our approach will be to use a Monte-Carlo simulation for obtaining a probability distribution of the correction angle given the distributions determined by the mean and standard deviations we specify for both the expected cable and background signals.
+
+Algorithm \ref{monte_algo} for sampling the bearing correction angle is summarized as follows.  We specify the distributions for the cable and background signals by defining their mean and standard deviations.  We then iterate the following process:  Draw samples from the cable and background distribution.  If those draws satisfy the triangle constraints, they are feasible, so compute the correction angle for them and include the result as a sample.  
+
+By running many thousands of iterations of this simulation for a given measured signal, we can generate a histogram of the possible correction angles.  Fig. XXX shows such a histogram.
+
+\begin{figure}
+  \caption{Histogram of monte-carlo sampling}
+  \label{fig:correction_hist}
+  \centering
+  \includegraphics[width=1.0\textwidth]{figures/correction_hist.pdf}}
+\end{figure}
+
 
 % \lstinputlisting[language=Python]{monte_car}
 
 
-\begin{algorithm}[H]
+\begin{algorithm}[H] \label{monte_algo}
 \SetAlgoLined
 \KwResult{Random samples drawn from distribution of bearing correction angles }
- $m \leftarrow$ input the measured signal amplitude\;
- $\mu_s \leftarrow$ input the cable signal mean\;
- $\sigma_s \leftarrow$ input the cable signal standard deviation\;
- $\mu_b \leftarrow$ input the background mean\;
- $\sigma_b \leftarrow$ input the background standard deviation\;
- 
- 
- \While{While condition}{
-  instructions\;
-  \eIf{condition}{
-   instructions1\;
-   instructions2\;
-   }{
-   instructions3\;
-  }
+ $m \gets$ input the measured signal amplitude\;
+ $\mu_s \gets$ input the cable signal mean\;
+ $\sigma_s \gets$ input the cable signal standard deviation\;
+ $\mu_b \gets$ input the background mean\;
+ $\sigma_b \gets$ input the background standard deviation\;
+ $N \gets$ input the desired number of samples\;
+ $M \gets$ the maximum iterations for finding a triangle solution
+ $n \gets 0$\;
+ $\bm{\theta}} \gets$ An array of length $N$\;
+ $n \gets 0$\;
+ \While{n < N}{
+     $i\gets0$\;
+     $keepon \gets$ true\;
+     \While{$i < M$ \And  keepon$}{
+          $s \gets$ Draw random value from cable signal distribution\;
+          $b \gets$ Draw random value from background signal distribution\;
+          \uIf{$\left(m-s\right)^2 \leq b ^ 2 \leq \left(m + s\right)^2$}{
+              $u \gets$ Draw randomly from $\left[-1, 1\right]$ with equal probability\; 
+              $\bm{\theta}\left[n\right] \gets u \cos^{-1}\left(\frac{m^2 + s^2 - b^2}{2ms}\right)$\;
+              $n = n + 1$\;
+              $keepon\gets$ false\;
+          }
+          \Else{
+              $keepon\gets$ true\;
+          }
+          $i \gets i + 1$\;
+     }
+     \If{$i = M}{
+         \text{Raise an error indicating that no triangle solutions could be found}
+     }
+
  }
- \caption{How to write algorithms}
+ \caption{Bearing correction Monte-Carlo sampling.}
 \end{algorithm}
 
 
-
-
-
-
-
-\section{Bogus}
-The density distribution for the gamma function is
-
-\begin{equation} \label{eq:gamma_dist}
-f\left(x\right) = \frac{1}{\Gamma\left(k\right)\phi^k}x^{k-1}e^{-\frac{x}{\phi}}
-\end{equation}
-where 
-%$f$ is the probability density, $\Gamma$ is the Gamma function, $k$ is the shape parameter, and $\phi$ is the scale %parameter.
-\begin{align*}
-        f\left(x\right) &= \text{The probability density}\\
-        \Gamma &= \text{The Gamma function}\\
-        k &= \left(\frac{\mu}{\sigma}\right)^2 = \text{the shape parameter} \\
-        \phi &= \frac{\sigma^2}{\mu} = \text{the scale parameter} \\
-        \mu &= \frac{\sigma^2}{\mu} = \text{the mean} \\
-        \sigma &= \frac{\sigma^2}{\mu} = \text{the standard deviation} \\
-\end{align*}
-
-\par  The approach we take to finding the 
 
 
 \end{appendices}
