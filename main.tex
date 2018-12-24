@@ -40,6 +40,7 @@
 \usepackage[boxruled ]{algorithm2e}
 \usepackage{listings}
 \usepackage{bm}
+\usepackage{gensymb}
 
 
 %%% Custom sectioning
@@ -96,7 +97,7 @@ Scott write this.
 Here is sin phi model.
 measurement is the sum of the two
 drop into phasor
-define max error
+define max error and what happens when sbr < 1
 compute bearing correction for exactly knows sig/back
 talk stats
 
@@ -105,29 +106,51 @@ talk stats
 
 
 \begin{appendices}
+
+
+
+
 \section{Estimating the Bearing Correction}
 \subsection{The Bearing Correction}
 The signal measured within the pipe will vary as a function of angle.  We can break down the source of this signal into two components.  The first component we will call the ``cable signal.''  This is the signal variation caused by the presence of the cable attached to the outside of the pipe.  The second component we will call the ``background signal,'' which arises from all other sources of angular asymmetry in the system.  This is thought to be dominated by imperfect centering of the instrument within the pipe.
 
-\par We model both the background and cable signals as if they were sinusoidal function.  Figure \ref{fig:sigs_vs_bearing} shows a model we will use as an example for describing our analysis.  In this model, the background signal is one quarter the amplitude of the cable signal and it is offset in angle by 135 degrees.  The instrument will measure the sum of these two signals, which, of course, will have a different amplitude and phase than either of is constituent signals.
+\par We model both the background and the cable signals as if they were sinusoidal function. The total measured signal is then given by
 
+\begin{equation} \label{eq:trig_sig}
+    s = C \sin\left(\theta + \phi_c\right) + B \sin\left(\theta + \phi_b\right),
+\end{equation}
+where
+\begin{align}
+        S &= \text{total signal amplitude} \\
+        C &= \text{cable signal amplitude} \\
+        B &= \text{background signal amplitude.} \\
+        \phi_c &= \text{The phase of the cable signal}\\
+        \phi_b &= \text{The phase of the background signal}\\
+\end{align}
+
+We will arbitrarily construct an example model where we set $C=1$, $B=.25$, $\phi_c=1$, and $\phi_b=135\degree$. Figure \ref{fig:sigs_vs_bearing} shows this model plotted as a function of bearing angle.
 \begin{figure}
-  \caption{An Example Model.  The background signal is one quarter the amplitude of the cable signal, and has a 135 degree offset in bearing.}
+  \caption{An Example Model.  In this example, we arbitrarily choose amplitudes and phases for the cable and background components such that  $s = \sin\theta + 0.25 \sin\left(\theta -135\degree\right)$
+  }
   \label{fig:sigs_vs_bearing}
   \centering
   \includegraphics[width=1.0\textwidth]{figures/sigs_vs_bearing.pdf}
 \end{figure}
 
+Although a plot of amplitude vs angle is useful, a better way of visualizing the problem is to transform it to a phasor representation.  To do this, recall that
+\begin{align}
+        \cos{\theta} &= Re\left(e^{i\theta}\right) \\
+        \sin{\theta} &= Im\left(e^{i\theta}\right). \\
+\end{align}
+This lets us visualize the components of the measured signal as if they were two-dimensional vectors (i.e. phasors) in the complex plane. Fig. \ref{fig:phasor_base} shows our example problem visualized with phasors.
 \begin{figure}
   \caption{
-  The phasor representation of the example model from Figure \ref{fig:sigs_vs_bearing}. $s$ is the measured cable signal, $b$ the background phasor and $m$ the measured phasor.  The value we really care about is $\theta$, the angle between the measured and cable signals.  Note that we can only determine the magnitude of the angle, but not the sign.  The phasor relationships shown in solids lines are indistinguishable from those shown by the dashed lines.  This model provides no information for distinguishing between the $\pm\theta$ solutions}
+  The phasor representation of the example model from Figure \ref{fig:sigs_vs_bearing}. $s$ is the cable-signal phasor, $b$ the background phasor and $m$ the measured phasor.  The value we really care about is $\theta$, the angle between the measured and cable signals.  Note that we can only determine the magnitude of the angle, but not the sign.  The phasor relationships shown in solids lines are indistinguishable from those shown by the dashed lines.  This model provides no information for distinguishing between the $\pm\theta$ solutions}
   \label{fig:phasor_base}
   \centering
   \includegraphics[width=1.0\textwidth]{figures/phasor_base.pdf}
 \end{figure}
-
-\par Our objective is to find the bearing correction that must be applied to the measured signal in order to arrive at the true cable signal.  This problem is most easily solved by considering the phasor representation.  Figure \ref{fig:phasor_base} shows the phasor representation for the same example model shown in Figure \ref{fig:sigs_vs_bearing}.  In this representation, the correction angle, $\theta$ is readily obtained from the law of cosines.
-
+Our objective is to find the bearing correction that must be applied to the measured signal in order to arrive at the true cable signal. In this representation, the correction angle, $\theta$ is readily obtained from the law of cosines.
 \begin{equation} \label{eq:law_of_cos}
     \cos\left(\theta\right) = \frac{m^2 + s^2 - b^2}{2ms}
 \end{equation}
@@ -143,6 +166,19 @@ where
         b &= \text{background signal amplitude} \\
         m &= \text{measured signal amplitude} \\
 \end{align*}
+
+
+\subsection{Placing Bounds on the Bearing Correction Angle}
+Here is where I do a bunch of explanation about Figure \ref{fig:theta_limits}.
+
+
+\begin{figure}
+  \caption{This will show the limits}
+  \label{fig:theta_limits}
+  \centering
+  \includegraphics[width=1.0\textwidth]{figures/phasor_base.pdf}
+\end{figure}
+
 
 
 
